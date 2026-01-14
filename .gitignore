@@ -1,0 +1,21 @@
+# Robot Framework output
+output/
+log.html
+report.html
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+
+# Test artefacts
+screenshots/
+videos/
+results/
