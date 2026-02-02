@@ -1,10 +1,12 @@
 click==8.3.1
+dotenv==0.9.9
 grpcio==1.76.0
 grpcio-tools==1.76.0
 natsort==8.4.0
 overrides==7.7.0
 protobuf==6.33.2
 psutil==7.2.1
+python-dotenv==1.2.1
 PyYAML==6.0.3
 robotframework==7.4.1
 robotframework-assertion-engine==3.0.3

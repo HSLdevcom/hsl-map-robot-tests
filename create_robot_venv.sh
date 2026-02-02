@@ -16,6 +16,7 @@ pip install --upgrade pip
 # 5. Install Robot Framework and Browser library
 pip install robotframework
 pip install robotframework-browser
+pip install dotenv
 
 # 6. Initialize Browser library (downloads Playwright browsers)
 rfbrowser init
