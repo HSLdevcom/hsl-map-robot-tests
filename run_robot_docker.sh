@@ -27,6 +27,7 @@ fi
 echo "[INFO] Running Robot Framework tests inside container..."
 docker run --rm \
   -v "$TESTS_DIR:/workspace/tests:ro" \
+  -v "$(pwd)/resources:/workspace/resources:ro" \
   -v "$RESULTS_DIR:/workspace/results" \
   -w /workspace \
   --name "$CONTAINER_NAME" \
