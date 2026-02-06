@@ -11,7 +11,8 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 RUN mkdir -p /ms-playwright && chmod -R 0777 /ms-playwright
 
 # Install RF + Browser and initialize ONLY Chromium first (smaller, faster)
-RUN pip install --no-cache-dir robotframework robotframework-browser dotenv && \
+RUN pip install --no-cache-dir robotframework robotframework-browser \
+    dotenv robotframework-doctestlibrary && \
     rfbrowser init
 
 WORKDIR /workspace

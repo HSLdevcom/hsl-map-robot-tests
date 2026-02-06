@@ -1,3 +1,4 @@
+
 *** Settings ***
 Library    Browser
 Variables  ../../resources/variables.py
@@ -8,6 +9,6 @@ Hello World Test
 
 Open Example Page
     New Browser    chromium    headless=${HEADLESS}
-    New Page    ${APP_URL}
+    New Page    ${EXAMPLE_URL}
     Get Title    ==    Example Domain
     Close Browser

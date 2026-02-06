@@ -26,8 +26,10 @@ fi
 # Run tests in container
 echo "[INFO] Running Robot Framework tests inside container..."
 docker run --rm \
+  -e HEADLESS=true \
   -v "$TESTS_DIR:/workspace/tests:ro" \
   -v "$(pwd)/resources:/workspace/resources:ro" \
+  -v "$(pwd)/.env:/workspace/.env:ro" \
   -v "$RESULTS_DIR:/workspace/results" \
   -w /workspace \
   --name "$CONTAINER_NAME" \
