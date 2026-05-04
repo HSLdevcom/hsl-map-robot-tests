@@ -7,14 +7,14 @@ Resource    ../../resources/hsl_map_publisher.resource
 ${location}    1010107
 
 *** Test Cases ***
-Compare Prod and Dev Material
-    [Tags]    ci
+Compare Prod and Local Material
+    [Tags]    local
     [Teardown]    Run Keyword And Ignore Error    Logout From HSL Map Publisher
     Login To HSL Map Publisher Prod
     Create List And Generate Material    location=${location}    type=Reference
     Logout From HSL Map Publisher
     
-    Login To HSL Map Publisher Dev
+    Login To HSL Map Publisher Local
     Create List And Generate Material    location=${location}    type=Candidate
     Logout From HSL Map Publisher
 

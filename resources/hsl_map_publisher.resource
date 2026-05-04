@@ -55,10 +55,17 @@ Login To HSL Map Publisher Prod
 Logout From HSL Map Publisher
     Click    text=Kirjaudu ulos
 
+Create List And Generate Material
+    [Arguments]    ${location}=1010107    ${type}=Reference
+    Create List
+    Generate And Download Material    location=${location}    type=${type}
+    [Teardown]    Delete List
+
 Generate And Download Material
-    [Arguments]    ${location}= 1010107    ${type}= Reference    
+    [Arguments]    ${location}=1010107    ${type}=Reference
     ${list_file}=    Get List Filename
     Click    [data-cy="template"]
+    Wait For Elements State    [data-cy="select-template-with-controls"]    visible    timeout=120s
     Click    [data-cy="select-template-with-controls"]
     Click    [data-cy="Default"]
     Click    h4:has-text("Ohjeet")
@@ -68,8 +75,23 @@ Generate And Download Material
     Click    [data-cy="${location}"]
     Click    [data-cy="generate-button"]
     Click    [data-cy="list"]
-    Wait For Elements State    [data-cy="${list_file}"] >> xpath=ancestor::div[1]/following-sibling::div >> text=1 / 1 sivua generoitu    visible    timeout=5min
+    Wait For Elements State    [data-cy="${list_file}"] >> xpath=ancestor::div[1]/following-sibling::div >> text=/1 \/ 1 sivua generoitu|epäonnistunut/    visible    timeout=5min
+    ${status_text}=    Get Text    [data-cy="${list_file}"] >> xpath=ancestor::div[1]/following-sibling::div >> text=/1 \/ 1 sivua generoitu|epäonnistunut/
+    IF    'epäonnistunut' in '''${status_text}'''
+        Handle Generation Failure    ${list_file}
+        Fail    Generation failed: ${status_text}
+    END
     ${download_promise}=    Promise To Wait For Download
     Click    [data-cy="${list_file}-show"] >> xpath=following-sibling::div >> button
     ${download}=    Wait For    ${download_promise}
     Move File    ${download}[saveAs]    results/${location}-${type}.pdf
+
+Handle Generation Failure
+    [Arguments]    ${list_file}
+    Click    [data-cy="${list_file}-show"]
+    Take Screenshot
+    Click    [data-cy="build-details-close-button"]
+    
+
+
+
