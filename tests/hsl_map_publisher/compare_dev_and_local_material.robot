@@ -9,13 +9,13 @@ ${location}    1010107
 *** Test Cases ***
 Compare Dev and Local Material
     [Tags]    local
-    [Teardown]    Run Keyword And Ignore Error    Logout From HSL Map Publisher
+    [Teardown]    Logout On Teardown
     Login To HSL Map Publisher Dev
-    Create List And Generate Material    location=${location}    type=Reference
+    Create List And Generate Material    location=${location}    type=Reference    template=Testiautomaatio
     Logout From HSL Map Publisher
     
     Login To HSL Map Publisher Local
-    Create List And Generate Material    location=${location}    type=Candidate
+    Create List And Generate Material    location=${location}    type=Candidate    template=Testiautomaatio
     Logout From HSL Map Publisher
 
     ${file1}=    Set Variable    results/${location}-Reference.pdf
@@ -28,14 +28,14 @@ Compare Dev and Local Material
 
 Generate Local Material
     [Tags]    local
-    [Teardown]    Run Keyword And Ignore Error    Logout From HSL Map Publisher
+    [Teardown]    Logout On Teardown
     Login To HSL Map Publisher Local
     Create List And Generate Material    location=${location}    type=Local
     Logout From HSL Map Publisher
 
 Generate Dev Material
     [Tags]    local
-    [Teardown]    Run Keyword And Ignore Error    Logout From HSL Map Publisher
+    [Teardown]    Logout On Teardown
     Login To HSL Map Publisher Dev
     Create List And Generate Material    location=${location}    type=Local
     Logout From HSL Map Publisher

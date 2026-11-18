@@ -34,3 +34,28 @@ Using Terminal:
 
 ## Docker Setup
 Run `run_robot_docker.sh` script.
+
+## Troubleshooting: RobotCode Shows Stale Keyword Errors
+Sometimes VS Code/RobotCode diagnostics can get out of sync with the current `.robot`/`.resource` files.
+In that case, tests can run successfully from terminal, but the editor still shows red underlines (for example: unexpected named argument, unknown keyword, or stale reference warnings).
+
+Use this reset when references look "stuck".
+
+### Typical Symptoms
+- A keyword call is underlined in red, but `robot` dry run or test run passes.
+- You changed a keyword argument list, but RobotCode still reports the old signature.
+- One file shows an error while similar files with the same keyword call do not.
+
+### Fix Steps (VS Code)
+1. Open Command Palette (`Cmd+Shift+P`).
+2. Run `RobotCode: Clear Cache and Restart Language Servers`.
+3. Wait a few seconds for analysis to restart.
+4. If the warning remains, run `Developer: Reload Window`.
+5. Ensure RobotCode uses workspace interpreter: `RobotCode: Select Python Environment` -> `.venv/bin/python`.
+
+### Verify From Terminal
+Run tests with the project interpreter to confirm real runtime status:
+
+`./.venv/bin/robot --dryrun -d results tests`
+
+If this passes, remaining editor warnings are usually stale language-server state, not actual Robot Framework execution failures.
