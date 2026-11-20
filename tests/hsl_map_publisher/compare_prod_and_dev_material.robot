@@ -9,13 +9,13 @@ ${location}    1010107
 *** Test Cases ***
 Compare Prod and Dev Material
     [Tags]    ci
-    [Teardown]    Run Keyword And Ignore Error    Logout From HSL Map Publisher
+    [Teardown]    Logout On Teardown
     Login To HSL Map Publisher Prod
-    Create List And Generate Material    location=${location}    type=Reference
+    Create List And Generate Material    location=${location}    type=Reference    template=Default
     Logout From HSL Map Publisher
     
     Login To HSL Map Publisher Dev
-    Create List And Generate Material    location=${location}    type=Candidate
+    Create List And Generate Material    location=${location}    type=Candidate    template=Testiautomaatio
     Logout From HSL Map Publisher
 
     ${file1}=    Set Variable    results/${location}-Reference.pdf
